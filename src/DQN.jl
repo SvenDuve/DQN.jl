@@ -10,16 +10,16 @@ using Parameters
 using UnPack
 using MLUtils
 using OneHotArrays
-using Rewards
-
 
 
 export greet, agent, set_q_function, ϵ_greedy, train_step!, set_greediness!
 
 
-greet() = print("Hello World!")
+"""
+    set_q_function(state_size, action_size)
 
-
+Create a Q-function with the given state and action size.
+"""
 function set_q_function(state_size, action_size) 
 
     return Chain(Dense(state_size, 64, relu),
@@ -28,6 +28,11 @@ function set_q_function(state_size, action_size)
 
 end
 
+"""
+    set_greediness!(aP::AgentParameter, step_counter::Int64)
+
+Set the greediness of the agent.
+"""
 function set_greediness!(aP::AgentParameter, step_counter::Int64) 
 
     # random exploration before train_start or random number less than ϵ
@@ -41,6 +46,12 @@ function set_greediness!(aP::AgentParameter, step_counter::Int64)
 
 end
 
+
+"""
+    ϵ_greedy(Qϕ, s, aP::AgentParameter, eP::EnvParameter)
+
+Return the action to take based on the Q-function and the current state.
+"""
 function ϵ_greedy(Qϕ, s, aP::AgentParameter, eP::EnvParameter)
 
     if rand() < aP.ϵ    
@@ -51,7 +62,11 @@ function ϵ_greedy(Qϕ, s, aP::AgentParameter, eP::EnvParameter)
 
 end
 
+"""
+    train_step!(S, A, R, S´, T, Qϕ, Qϕ´, opt_critic, ap::Parameter, ep::EnvParameter)
 
+Train the critic network with gradient descent.
+"""
 function train_step!(S, A, R, S´, T, Qϕ, Qϕ´, opt_critic, ap::Parameter, ep::EnvParameter)
     
     
@@ -64,7 +79,11 @@ function train_step!(S, A, R, S´, T, Qϕ, Qϕ´, opt_critic, ap::Parameter, ep:
 end
 
 
+"""
+    agent(environment::DiscreteEnvironment, agentParams::AgentParameter)
 
+Train the agent in the given environment with the given parameters.
+"""
 function agent(environment::DiscreteEnvironment, agentParams::AgentParameter) 
 
     gym = pyimport("gymnasium")
