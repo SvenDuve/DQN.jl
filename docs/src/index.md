@@ -59,7 +59,8 @@ using DQN
 Once the above is installed, the following code can be used to train an agent:
 
 ```julia
-using DDPG
+using DQN
+using RLTyes
 agent(Acrobot(), AgentParameter(training_episodes=100, batch_size=128))
 ```
 
