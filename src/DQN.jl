@@ -12,7 +12,7 @@ using MLUtils
 using OneHotArrays
 
 
-export greet, agent, set_q_function, ϵ_greedy, train_step!, set_greediness!
+export greet, agent, renderEnv, set_q_function, ϵ_greedy, train_step!, set_greediness!
 
 
 """
