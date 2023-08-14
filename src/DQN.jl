@@ -213,7 +213,7 @@ function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
     gym = pyimport("gymnasium")
     
     if environment isa LunarLanderDiscrete
-        global env = gym.make("LunarLander-v2", continuous = true, render_mode="human")
+        global env = gym.make("LunarLander-v2", render_mode="human")
         # global env = gym.make("LunarLander-v2", continuous = true)
     elseif environment isa Acrobot
         global env = gym.make("Acrobot-v1", render_mode="human")
