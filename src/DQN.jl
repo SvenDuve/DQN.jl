@@ -228,7 +228,8 @@ function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
 
     while notSolved
         
-        a = action(policy, s, false, EnvParameter(), AgentParameter()) 
+        #a = action(policy, s, false, EnvParameter(), AgentParameter()) 
+        a = ϵ_greedy(policy, s, AgentParameter(), EnvParameter()) 
 
         s´, r, terminated, truncated, _ = env.step(a)
 
