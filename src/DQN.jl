@@ -207,7 +207,11 @@ function agent(environment::DiscreteEnvironment, agentParams::AgentParameter)
 
 end
 
+"""
+renderEnv(environment::DiscreteEnvironment, policy, seed=42)
 
+Renders a discrete environment with the given policy.
+"""
 function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
 
     gym = pyimport("gymnasium")
@@ -229,7 +233,8 @@ function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
     while notSolved
         
         #a = action(policy, s, false, EnvParameter(), AgentParameter()) 
-        a = ϵ_greedy(policy, s, AgentParameter(), EnvParameter()) 
+        # a = ϵ_greedy(policy, s, AgentParameter(), EnvParameter()) 
+        a = argmax(policy(s)) - 1
 
         s´, r, terminated, truncated, _ = env.step(a)
 
