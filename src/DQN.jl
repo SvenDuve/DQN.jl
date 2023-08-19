@@ -218,7 +218,6 @@ function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
     
     if environment isa LunarLanderDiscrete
         global env = gym.make("LunarLander-v2", render_mode="human")
-        # global env = gym.make("LunarLander-v2", continuous = true)
     elseif environment isa Acrobot
         global env = gym.make("Acrobot-v1", render_mode="human")
     else
@@ -232,8 +231,6 @@ function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
 
     while notSolved
         
-        #a = action(policy, s, false, EnvParameter(), AgentParameter()) 
-        # a = ϵ_greedy(policy, s, AgentParameter(), EnvParameter()) 
         a = argmax(policy(s)) - 1
 
         s´, r, terminated, truncated, _ = env.step(a)
@@ -242,7 +239,6 @@ function renderEnv(environment::DiscreteEnvironment, policy, seed=42)
 
         append!(R, r)
 
-        # sleep(0.05)
         s = s´
         notSolved = !t
     end
